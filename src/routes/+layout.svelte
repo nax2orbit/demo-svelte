@@ -59,6 +59,27 @@
 			</svelte:fragment>
 		</AppBar>
 	</svelte:fragment>
-	<!-- Page Route Content -->
-	<slot />
+
+	<!-- サイドバー -->
+	<div class="flex min-h-screen">
+		<nav class="w-64 p-4 bg-surface-100">
+			<ul class="space-y-2">
+				<li>
+					<button class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition">
+						test１
+					</button>
+				</li>
+				<li>
+					<button class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition">
+						test２
+					</button>
+				</li>
+			</ul>
+		</nav>
+		<!-- メインコンテンツ -->
+		<main class="flex-1 p-4">
+			<!-- Page Route Content -->
+			<slot />
+		</main>
+	</div>
 </AppShell>
