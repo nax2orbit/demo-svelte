@@ -9,3 +9,4 @@ export type GuiItem = {
 };
 
 export const guiItems = writable<GuiItem[]>([]);
+export const selectedItemId = writable<string | null>(null);

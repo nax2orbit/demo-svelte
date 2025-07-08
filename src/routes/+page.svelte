@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { guiItems } from '$lib/stores';
+  import { guiItems, selectedItemId } from '$lib/stores';
 
   let dragId = null;
   let offsetX = 0;
@@ -36,6 +36,11 @@
             class="absolute cursor-move"
             style="left: {item.x}px; top: {item.y}px;"
             on:mousedown={(e) => handleMouseDown(e, item)}
+            on:click={() => selectedItemId.set(item.id)}
+            on:contextmenu={(e) => {
+                e.preventDefault();
+                selectedItemId.set(item.id);
+            }}
         >
             {#if item.type === 'input'}
                 <input type="text" class="p-2 border rounded" placeholder="テキストを入力" />
