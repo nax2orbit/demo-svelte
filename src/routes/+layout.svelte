@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { inputFields, buttons } from '$lib/stores';
+	import { guiItems } from '$lib/stores';
 
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
@@ -22,6 +22,19 @@
 	import { computePosition, autoUpdate, flip, shift, offset, arrow } from '@floating-ui/dom';
 	import { storePopup } from '@skeletonlabs/skeleton';
 	storePopup.set({ computePosition, autoUpdate, flip, shift, offset, arrow });
+
+	function addInput() {
+		guiItems.update(items => [
+			...items,
+			{ id: crypto.randomUUID(), type: 'input', x: 50, y: 50 }
+		]);
+	}
+	function addButton() {
+		guiItems.update(items => [
+			...items,
+			{ id: crypto.randomUUID(), type: 'button', label: '追加ボタン', x: 100, y: 100 }
+		]);
+	}
 </script>
 
 <!-- App Shell -->
@@ -68,7 +81,7 @@
 				<li>
 					<button
 						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={() => inputFields.update(arr => [...arr, arr.length])}
+						on:click={addInput}
 					>
 						TextField
 					</button>
@@ -76,7 +89,7 @@
 				<li>
 					<button
 						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={() => buttons.update(arr => [...arr, '追加ボタン'])}
+						on:click={addButton}
 					>
 						Button
 					</button>

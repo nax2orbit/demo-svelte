@@ -1,6 +1,11 @@
 import { writable } from 'svelte/store';
 
-// showInput を配列で管理
-export const inputFields = writable<number[]>([]);
+export type GuiItem = {
+    id: string;
+    type: 'input' | 'button';
+    label?: string;
+    x: number;
+    y: number;
+};
 
-export const buttons = writable<string[]>([]);
+export const guiItems = writable<GuiItem[]>([]);
