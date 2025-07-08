@@ -1,5 +1,6 @@
 import { writable } from 'svelte/store';
 
-export const showInput = writable(false);
+// showInput を配列で管理
+export const inputFields = writable<number[]>([]);
 
 export const buttons = writable<string[]>([]);

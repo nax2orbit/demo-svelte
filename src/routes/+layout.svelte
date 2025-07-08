@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
-	import { showInput, buttons } from '$lib/stores';
+	import { inputFields, buttons } from '$lib/stores';
 
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
@@ -68,7 +68,7 @@
 				<li>
 					<button
 						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={() => showInput.set(true)}
+						on:click={() => inputFields.update(arr => [...arr, arr.length])}
 					>
 						TextField
 					</button>
