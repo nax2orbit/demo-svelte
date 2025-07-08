@@ -1,6 +1,7 @@
 <script lang="ts">
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
+	import { showInput, buttons } from '$lib/stores';
 
 	// Highlight JS
 	import hljs from 'highlight.js/lib/core';
@@ -65,13 +66,19 @@
 		<nav class="w-64 p-4 bg-surface-100">
 			<ul class="space-y-2">
 				<li>
-					<button class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition">
-						test１
+					<button
+						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
+						on:click={() => showInput.set(true)}
+					>
+						TextField
 					</button>
 				</li>
 				<li>
-					<button class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition">
-						test２
+					<button
+						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
+						on:click={() => buttons.update(arr => [...arr, '追加ボタン'])}
+					>
+						Button
 					</button>
 				</li>
 			</ul>

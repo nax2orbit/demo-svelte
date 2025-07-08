@@ -1,4 +1,7 @@
 <!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script lang="ts">
+  import { showInput, buttons } from '$lib/stores';
+</script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
 	<div class="space-y-10 text-center flex flex-col items-center">
@@ -33,6 +36,15 @@
 			<p><code class="code">/src/routes/+layout.svelte</code></p>
 			<p><code class="code">/src/routes/+page.svelte</code></p>
 		</div>
+
+
+{#if $showInput}
+    <input type="text" class="w-full p-2 border rounded" placeholder="テキストを入力" />
+{/if}
+
+{#each $buttons as label, i}
+    <button class="mt-2 px-4 py-2 bg-blue-500 text-white rounded">{label} {i + 1}</button>
+{/each}
 	</div>
 </div>
 
