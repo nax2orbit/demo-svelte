@@ -2,6 +2,8 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { selectedItemId, guiItems } from '$lib/stores';
+	import Sidebar from '$lib/Sidebar.svelte';
+	import PropertyPanel from '$lib/PropertyPanel.svelte';
 	$: selectedItem = $guiItems.find(item => item.id === $selectedItemId);
 
 	// Highlight JS
@@ -75,91 +77,12 @@
 		</AppBar>
 	</svelte:fragment>
 
-	<!-- サイドバー -->
 	<div class="flex min-h-screen">
-		<nav class="w-64 p-4 bg-surface-100">
-			<ul class="space-y-2">
-				<li>
-					<button
-						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={addInput}
-					>
-						TextField
-					</button>
-				</li>
-				<li>
-					<button
-						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={addButton}
-					>
-						Button
-					</button>
-				</li>
-				<li>
-					<button
-						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
-						on:click={() => {
-							guiItems.update(items => [
-								...items,
-								{ id: crypto.randomUUID(), type: 'label', label: 'ラベル', x: 120, y: 120 }
-							]);
-						}}
-					>
-						Label
-					</button>
-				</li>
-			</ul>
-		</nav>
-		<!-- メインコンテンツ -->
+		<Sidebar {addInput} {addButton} />
 		<main class="flex-1 p-4">
 			<!-- Page Route Content -->
 			<slot />
 		</main>
-
-		<!-- プロパティパネル -->
-		<div class="w-80 bg-white border-l p-4">
-			{#if selectedItem}
-				<h2 class="font-bold mb-2">プロパティ</h2>
-				{#if selectedItem.type === 'button'}
-					<div class="mb-2">
-						<label class="block text-sm mb-1">ラベル</label>
-						<input
-							type="text"
-							class="border rounded p-1 w-full"
-							value={selectedItem.label}
-							on:input={(e) => {
-								guiItems.update(items =>
-									items.map(item =>
-										item.id === selectedItem.id
-											? { ...item, label: e.target.value }
-											: item
-									)
-								);
-							}}
-						/>
-					</div>
-					<div class="mb-2">
-						<label class="block text-sm mb-1">色</label>
-						<input
-							type="color"
-							class="w-10 h-10 p-0 border-none"
-							value={selectedItem.color || '#3b82f6'}
-							on:input={(e) => {
-								guiItems.update(items =>
-									items.map(item =>
-										item.id === selectedItem.id
-											? { ...item, color: e.target.value }
-											: item
-									)
-								);
-							}}
-						/>
-					</div>
-				{/if}
-				<!-- input用のプロパティも同様に追加可能 -->
-			{:else}
-				<div class="text-gray-400">パーツを選択してください</div>
-			{/if}
-		</div>
+		<PropertyPanel {selectedItem} />
 	</div>
 </AppShell>
