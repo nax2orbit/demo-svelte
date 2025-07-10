@@ -95,6 +95,19 @@
 						Button
 					</button>
 				</li>
+				<li>
+					<button
+						class="w-full px-2 py-1 rounded bg-surface-200 text-center hover:bg-surface-300 transition"
+						on:click={() => {
+							guiItems.update(items => [
+								...items,
+								{ id: crypto.randomUUID(), type: 'label', label: 'ラベル', x: 120, y: 120 }
+							]);
+						}}
+					>
+						Label
+					</button>
+				</li>
 			</ul>
 		</nav>
 		<!-- メインコンテンツ -->

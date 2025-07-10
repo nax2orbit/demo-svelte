@@ -46,6 +46,8 @@
                 <input type="text" class="p-2 border rounded" placeholder="テキストを入力" />
             {:else if item.type === 'button'}
                 <button class="px-4 py-2 bg-blue-500 text-white rounded">{item.label}</button>
+            {:else if item.type === 'label'}
+                <span class="px-2 py-1 bg-gray-200 rounded">{item.label}</span>
             {/if}
         </div>
     {/each}
