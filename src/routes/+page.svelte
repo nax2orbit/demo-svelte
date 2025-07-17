@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { guiItems, selectedItemId } from '$lib/stores';
+  import { guiItems, selectedItemId, type GuiItem } from '$lib/stores';
 
-  let dragId = null;
+  let dragId: string | null = null;
   let offsetX = 0;
   let offsetY = 0;
 
-  function handleMouseDown(e, item) {
+  function handleMouseDown(e: MouseEvent, item: GuiItem) {
       dragId = item.id;
       offsetX = e.clientX - item.x;
       offsetY = e.clientY - item.y;
@@ -13,7 +13,7 @@
       window.addEventListener('mouseup', handleMouseUp);
   }
 
-  function handleMouseMove(e) {
+  function handleMouseMove(e: MouseEvent) {
       guiItems.update(items =>
           items.map(item =>
               item.id === dragId
@@ -35,8 +35,16 @@
         <div
             class="absolute cursor-move"
             style="left: {item.x}px; top: {item.y}px;"
+            role="button"
+            tabindex="0"
+            aria-label="GUIアイテム"
             on:mousedown={(e) => handleMouseDown(e, item)}
             on:click={() => selectedItemId.set(item.id)}
+            on:keydown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    selectedItemId.set(item.id);
+                }
+            }}
             on:contextmenu={(e) => {
                 e.preventDefault();
                 selectedItemId.set(item.id);
@@ -54,18 +62,6 @@
 </div>
 
 <style lang="postcss">
-	figure {
-		@apply flex relative flex-col;
-	}
-	figure svg,
-	.img-bg {
-		@apply w-64 h-64 md:w-80 md:h-80;
-	}
-	.img-bg {
-		@apply absolute z-[-1] rounded-full blur-[50px] transition-all;
-		animation: pulse 5s cubic-bezier(0, 0, 0, 0.5) infinite,
-			glow 5s linear infinite;
-	}
 	@keyframes glow {
 		0% {
 			@apply bg-primary-400/50;
