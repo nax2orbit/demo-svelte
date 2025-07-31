@@ -2,7 +2,7 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { selectedItemId, guiItems } from '$lib/stores';
-	import Sidebar from '$lib/Sidebar.svelte';
+	import Sidebar from '$lib/components/RightPanel/RightPanel.svelte';
 	import PropertyPanel from '$lib/PropertyPanel.svelte';
 	$: selectedItem = $guiItems.find(item => item.id === $selectedItemId);
 
