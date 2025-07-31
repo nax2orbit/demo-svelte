@@ -2,8 +2,8 @@
 	import '../app.postcss';
 	import { AppShell, AppBar } from '@skeletonlabs/skeleton';
 	import { selectedItemId, guiItems } from '$lib/stores';
-	import Sidebar from '$lib/components/RightPanel/RightPanel.svelte';
-	import PropertyPanel from '$lib/PropertyPanel.svelte';
+	import LeftPanel from '$lib/components/LeftPanel/LeftPanel.svelte';
+	import RightPanel from '$lib/components/RightPanel/RightPanel.svelte';
 	$: selectedItem = $guiItems.find(item => item.id === $selectedItemId);
 
 	// Highlight JS
@@ -78,11 +78,11 @@
 	</svelte:fragment>
 
 	<div class="flex min-h-screen">
-		<Sidebar {addInput} {addButton} />
+		<LeftPanel {addInput} {addButton} />
 		<main class="flex-1 p-4">
 			<!-- Page Route Content -->
 			<slot />
 		</main>
-		<PropertyPanel {selectedItem} />
+		<RightPanel {selectedItem} />
 	</div>
 </AppShell>
